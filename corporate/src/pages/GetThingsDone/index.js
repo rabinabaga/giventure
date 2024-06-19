@@ -1,10 +1,17 @@
 import { Container } from "reactstrap";
 import BreadCrumb from "../../Components/Common/BreadCrumb";
+import { addTitleThunk } from "../../slices/thunks";
+import { v4 as uuidv4 } from "uuid";
+import { useDispatch, useSelector } from "react-redux";
+import InputTextArea from "./input-textarea";
 
 const GetThingsDone = () => {
+  const dispatch = useDispatch();
   document.title = "Get Things Done"; //for meta title
-
+  const newTaskStateTitle = useSelector((state) => state.NewTask.title);
+  console.log("titile new task", newTaskStateTitle);
   const handleSubmit = (e) => {
+    dispatch(addTitleThunk(e.target.value));
     e.target.classList.add("hide");
     document;
 
@@ -43,20 +50,16 @@ const GetThingsDone = () => {
                   {" "}
                   <i class="ri-map-pin-3-fill"></i>
                 </span>
-                Design giventure
+                {newTaskStateTitle}
               </div>
               <div className="item-2">
-                Give me some steps to get there
+                Give me some steps to complete it
                 <br />
-                <span> :Press Enter to confirm the step</span>
+                <span> ( :Press Enter to confirm the step )</span>
               </div>
               <div className="item-3 ">
-                <textarea
-                  className="step-textarea"
-                  placeholder="the first step here....."
-                ></textarea>
+              <InputTextArea/>
               </div>
-              <div>hello</div> <div>hello</div>
             </div>
 
             {/* <div className="title">Designing the giventure</div> */}

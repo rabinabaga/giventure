@@ -1,5 +1,5 @@
 .get-things-done-container {
-  @mixin textarea-decor($width) {
+  @mixin textarea-decor($width, $align) {
     opacity: 1;
     resize: none;
     width: $width;
@@ -13,6 +13,16 @@
 
     &::placeholder {
       font-style: italic;
+    }
+    @if $align == left {
+      text-align: left;
+      &::placeholder {
+        text-align: left;
+      }
+    } @else if $align == center {
+      ::placeholder {
+        text-align: center;
+      }
     }
   }
   .giventure-main-activity {
@@ -37,8 +47,6 @@
       text-align: center;
     }
 
-   
-
     @mixin grid-item-style() {
       align-self: end;
     }
@@ -47,11 +55,12 @@
       padding-top: 12px;
       grid-column: 1 / span 6;
       grid-row: 3 / span 5;
-       .step-textarea{
+      .step-textarea {
         height: 30px;
-      @include textarea-decor(597px)
-     
-    }
+        line-height: 1;
+        @include textarea-decor(497px, left);
+       
+      }
     }
 
     .item-1 {
@@ -75,6 +84,7 @@
       font-size: 1.44rem;
       font-weight: 600;
       grid-area: hint;
+      line-height: 17px;
       @include grid-item-style();
       span {
         font-size: 0.833rem;
@@ -85,19 +95,18 @@
   }
 
   height: 80vh;
-  overflow: hidden;
+  // overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  
 
   .search-box {
     margin-bottom: 20px;
     position: relative;
 
     textarea {
-      @include textarea-decor(728px);
+      @include textarea-decor(728px, center);
     }
     textarea.hide {
       opacity: 0;

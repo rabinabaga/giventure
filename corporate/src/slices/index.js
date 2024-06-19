@@ -3,6 +3,9 @@ import { combineReducers } from "redux";
 // Front
 import LayoutReducer from "./layouts/reducer";
 
+//Get Things Done
+import NewTaskReducer from "./getThingsDone/reducer";
+
 // Authentication
 import LoginReducer from "./auth/login/reducer";
 import AccountReducer from "./auth/register/reducer";
@@ -95,7 +98,8 @@ const rootReducer = combineReducers({
     FileManager: FileManagerReducer,
     Todos: TodosReducer,
     Jobs: JobReducer,
-    APIKey: APIKeyReducer
+    APIKey: APIKeyReducer,
+    NewTask: NewTaskReducer
 });
 
 export default rootReducer;
