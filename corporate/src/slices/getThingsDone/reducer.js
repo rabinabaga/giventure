@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 export const initialState = {
   title: "",
   steps: [{
-    step_title:"",
+    stepTitle:"",
     id:uuidv4(), 
   }],
 };
@@ -14,7 +14,8 @@ const newTaskSlice = createSlice({
      initialState,
     reducers:{
         addStep:(state, action) => {
-            state.steps = state.steps.push(action.payload)
+         state.steps[state.steps.length-1].stepTitle = action.payload;
+        
         },
         addTitle:(state,action) => {
             state.title = action.payload

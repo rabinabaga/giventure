@@ -1,6 +1,6 @@
 import { Container } from "reactstrap";
 import BreadCrumb from "../../Components/Common/BreadCrumb";
-import { addTitleThunk } from "../../slices/thunks";
+import { addStepThunk, addTitleThunk } from "../../slices/thunks";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import InputTextArea from "./input-textarea";
@@ -9,9 +9,20 @@ const GetThingsDone = () => {
   const dispatch = useDispatch();
   document.title = "Get Things Done"; //for meta title
   const newTaskStateTitle = useSelector((state) => state.NewTask.title);
+
+  const newTaskStateSteps = useSelector((state) => state.NewTask.steps);
+  console.log("new task steps", newTaskStateSteps);
   console.log("titile new task", newTaskStateTitle);
   const handleSubmit = (e) => {
-    dispatch(addTitleThunk(e.target.value));
+    if (e.target.name === "step-title") {
+      dispatch(
+        addStepThunk(
+         e.target.value,
+        )
+      );
+    } else if (e.target.name === "title") {
+      dispatch(addTitleThunk(e.target.value));
+    }
     e.target.classList.add("hide");
     document;
 
@@ -22,7 +33,7 @@ const GetThingsDone = () => {
 
     document.getElementsByClassName("icon-container")[0].classList.add("hide");
   };
-  const handleInput = (e) => {
+  const handleEnterPress = (e) => {
     console.log("here");
     //Auto resize
     e.target.style.height = "auto";
@@ -58,7 +69,14 @@ const GetThingsDone = () => {
                 <span> ( :Press Enter to confirm the step )</span>
               </div>
               <div className="item-3 ">
-              <InputTextArea/>
+                {newTaskStateSteps.map((step, index) => {
+                  return (
+                    <InputTextArea
+                      name="step-title"
+                      onHandleEnterPress={handleEnterPress}
+                    />
+                  );
+                })}
               </div>
             </div>
 
@@ -68,8 +86,9 @@ const GetThingsDone = () => {
               <div class="search-box">
                 <form>
                   <textarea
+                    name="title"
                     type="text"
-                    onKeyDown={handleInput}
+                    onKeyDown={handleEnterPress}
                     placeholder="Hi Anna !! What are you upto today?"
                   />
                 </form>
