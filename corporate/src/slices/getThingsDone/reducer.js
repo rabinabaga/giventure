@@ -15,12 +15,16 @@ const newTaskSlice = createSlice({
     reducers:{
         addStep:(state, action) => {
          state.steps[state.steps.length-1].stepTitle = action.payload;
-        
+          state.steps.push({
+            stepTitle: "",
+            id: uuidv4(),
+          });
         },
         addTitle:(state,action) => {
             state.title = action.payload
         }
-    }
+    },
+    
 })
 
 export const { addStep, addTitle } = newTaskSlice.actions;

@@ -53,13 +53,27 @@
 
     .item-3 {
       padding-top: 12px;
-      grid-column: 1 / span 6;
-      grid-row: 3 / span 5;
+      grid-column: 1 / span 5;
+      grid-row: 3 / span 3;
       .step-textarea {
         height: 30px;
         line-height: 1;
         @include textarea-decor(497px, left);
-       
+      }
+    }
+    .item-4 {
+      grid-column: 4/ span 1;
+      grid-row: 6 / span 1;
+      align-self: end;
+      justify-self: end;
+
+      button{
+        padding:5px 10px;
+        border-radius: 4px;
+        color: white;
+        background-color: #1212f7;
+
+        
       }
     }
 

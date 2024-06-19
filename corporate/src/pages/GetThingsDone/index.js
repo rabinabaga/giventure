@@ -17,9 +17,10 @@ const GetThingsDone = () => {
     if (e.target.name === "step-title") {
       dispatch(
         addStepThunk(
-         e.target.value,
+         e.target.value
         )
       );
+     
     } else if (e.target.name === "title") {
       dispatch(addTitleThunk(e.target.value));
     }
@@ -77,6 +78,10 @@ const GetThingsDone = () => {
                     />
                   );
                 })}
+              </div>
+
+              <div className="item-4">
+                <button className="primary">Save</button>
               </div>
             </div>
 
