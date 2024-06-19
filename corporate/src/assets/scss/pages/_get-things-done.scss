@@ -1,4 +1,20 @@
 .get-things-done-container {
+  @mixin textarea-decor($width) {
+    opacity: 1;
+    resize: none;
+    width: $width;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.5s ease;
+
+    &::placeholder {
+      font-style: italic;
+    }
+  }
   .giventure-main-activity {
     &.hide {
       display: none;
@@ -21,38 +37,46 @@
       text-align: center;
     }
 
+   
+
     @mixin grid-item-style() {
       align-self: end;
     }
 
     .item-3 {
-      grid-column: 1 / span 5;
+      padding-top: 12px;
+      grid-column: 1 / span 6;
       grid-row: 3 / span 5;
+       .step-textarea{
+        height: 30px;
+      @include textarea-decor(597px)
+     
+    }
     }
 
     .item-1 {
       grid-area: title;
       @include grid-item-style();
-      font-size: 1.728rem;
+      font-size: 1.2rem;
       text-decoration: underline;
       text-decoration-color: #d4d2d2;
-      text-underline-offset: 0.2em; 
+      text-underline-offset: 0.2em;
       transition: text-decoration 0.5s ease;
-      i{
+      i {
         font-size: 22px;
         color: #d48b8b;
-        
       }
-      .no-underline-icon{
+      .no-underline-icon {
         text-decoration: none;
         margin-right: 5px;
       }
     }
     .item-2 {
-      font-size: 1rem;
+      font-size: 1.44rem;
+      font-weight: 600;
       grid-area: hint;
       @include grid-item-style();
-      span{
+      span {
         font-size: 0.833rem;
         font-style: italic;
         color: #958f8f;
@@ -66,26 +90,14 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  
 
   .search-box {
     margin-bottom: 20px;
     position: relative;
 
     textarea {
-      opacity: 1;
-      resize: none;
-      width: 728px;
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      text-align: center;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: opacity 0.5s ease;
-
-      &::placeholder {
-        font-style: italic;
-      }
+      @include textarea-decor(728px);
     }
     textarea.hide {
       opacity: 0;

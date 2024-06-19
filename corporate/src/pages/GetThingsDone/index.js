@@ -50,7 +50,12 @@ const GetThingsDone = () => {
                 <br />
                 <span> :Press Enter to confirm the step</span>
               </div>
-              <div className="item-3">hello</div>
+              <div className="item-3 ">
+                <textarea
+                  className="step-textarea"
+                  placeholder="the first step here....."
+                ></textarea>
+              </div>
               <div>hello</div> <div>hello</div>
             </div>
 
