@@ -117,6 +117,10 @@ const Navdata = () => {
             history("/get-things-done");
             document.body.classList.add('twocolumn-panel');
         }
+         if (iscurrentState === "YourBusinesses") {
+           history("/your-businesses");
+           document.body.classList.add("twocolumn-panel");
+         }
         if (iscurrentState !== 'Landing') {
             setIsLanding(false);
         }
@@ -146,6 +150,16 @@ const Navdata = () => {
          click: function (e) {
            e.preventDefault();
            setIscurrentState("GetThingsDone");
+         },
+       },
+       {
+         id: "Your  Businesses",
+         label: "Your - Businesses",
+         icon: "ri-briefcase-line",
+         link: "/your-businesses",
+         click: function (e) {
+           e.preventDefault();
+           setIscurrentState("YourBusinesses");
          },
        },
      ];

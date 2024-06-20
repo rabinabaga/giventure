@@ -12,6 +12,9 @@ export const SOCIAL_LOGIN = "/social-login";
 export const POST_EDIT_JWT_PROFILE = "/post-jwt-profile";
 export const POST_EDIT_PROFILE = "/user";
 
+//GAME PLAN
+export const GET_ALL_GAME_PLANS = "/game_plan";
+
 // Calendar
 export const GET_EVENTS = "/events";
 export const GET_CATEGORIES = "/categories";

@@ -15,7 +15,7 @@ console.log(result1);
 const token = result1.result.accessToken;
 console.log(token);
   try {
-    const response = await axios.post("api/v1/game_plan", data, {
+    const response = await axios.post("game_plan", data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -26,12 +26,13 @@ console.log(token);
   }
 }
 
+export const getAllGamePlans = (data) => api.get(url.GET_ALL_GAME_PLANS);
 
 
 
 
 // Login Method
-export const postLogin = (data) => api.create("api/v1/auth/login", data);
+export const postLogin = (data) => api.create("auth/login", data);
 
 // Gets the logged in user data from local session
 export const getLoggedInUser = () => {

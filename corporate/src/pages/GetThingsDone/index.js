@@ -6,22 +6,25 @@ import { useDispatch, useSelector } from "react-redux";
 import InputTextArea from "./input-textarea";
 import { postGamePlan } from "../../helpers/fakebackend_helper";
 
-  import { ToastContainer, toast } from "react-toastify";
-    import "react-toastify/dist/ReactToastify.css";
-  
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+
 
 const GetThingsDone = () => {
+  const history = useNavigate();
   const dispatch = useDispatch();
-    const newTaskState = useSelector((state) => state.NewTask);
+  const newTaskState = useSelector((state) => state.NewTask);
   const newTaskStateTitle = useSelector((state) => state.NewTask.title);
 
-  const handleSave  = () => {
-           toast("successfully posted");
-const dataToSave = [...newTaskState.steps];
-dataToSave.pop();
-    const response = postGamePlan({title: newTaskStateTitle, steps: dataToSave});
-    if(response){
-
+  const handleSave = () => {
+    const dataToSave = [...newTaskState.steps];
+    dataToSave.pop();
+    const response = postGamePlan({ title: newTaskStateTitle, steps: dataToSave });
+    if (response) {
+      
+      toast("successfully posted");
+      history("/your-businesses");
     }
   }
   document.title = "Get Things Done"; //for meta title
@@ -33,10 +36,10 @@ dataToSave.pop();
     if (e.target.name === "step-title") {
       dispatch(
         addStepThunk(
-         e.target.value
+          e.target.value
         )
       );
-     
+
     } else if (e.target.name === "title") {
       dispatch(addTitleThunk(e.target.value));
     }
@@ -67,7 +70,7 @@ dataToSave.pop();
 
   return (
     <>
-  <ToastContainer/>
+      <ToastContainer />
       <div className="page-content">
         <Container fluid={true}>
           {/* <BreadCrumb title="Get Things Done" breadcrumbItem="Get Things Done" /> */}

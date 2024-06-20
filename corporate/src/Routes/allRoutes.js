@@ -1,11 +1,12 @@
 import React from "react";
+import YourBusinesses from "../pages/ToDo"
 
 //GetThingsDone
 import GetThingsDone from "../pages/GetThingsDone";
 import Login from "../pages/Authentication/Login";
 const authProtectedRoutes = [
   { path: "/get-things-done", component: <GetThingsDone /> },
-  { path: "/login", component: <Login /> },
+  { path: "/your-businesses", component: <YourBusinesses /> },
 ];
 const publicRoutes = [
   // Authentication Page
