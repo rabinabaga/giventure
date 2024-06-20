@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardBody, Col, Container, Input, Label, Row, Button, Form, FormFeedback, Alert, Spinner } from 'reactstrap';
 import ParticlesAuth from "../AuthenticationInner/ParticlesAuth";
-
 //redux
 import { useSelector, useDispatch } from "react-redux";
 
@@ -25,12 +24,15 @@ const Login = (props) => {
     const loginpageData = createSelector(
         selectLayoutState,
         (state) => ({
-            user: state.Account.user,
+            user: state.Login.user,
             error: state.Login.error,
             loading: state.Login.loading,
             errorMsg: state.Login.errorMsg,
         })
     );
+     
+
+    console.log("login page data", loginpageData);
     // Inside your component
     const {
         user, error, loading, errorMsg
@@ -40,32 +42,23 @@ const Login = (props) => {
     const [passwordShow, setPasswordShow] = useState(false);
 
 
-    useEffect(() => {
-        if (user && user) {
-            const updatedUserData = process.env.REACT_APP_DEFAULTAUTH === "firebase" ? user.multiFactor.user.email : user.user.email;
-            const updatedUserPassword = process.env.REACT_APP_DEFAULTAUTH === "firebase" ? "" : user.user.confirm_password;
-            setUserLogin({
-                email: updatedUserData,
-                password: updatedUserPassword
-            });
-        }
-    }, [user]);
+   
 
     const validation = useFormik({
-        // enableReinitialize : use this flag when initial values needs to be changed
-        enableReinitialize: true,
+      // enableReinitialize : use this flag when initial values needs to be changed
+      enableReinitialize: true,
 
-        initialValues: {
-            email: userLogin.email || "admin@themesbrand.com" || '',
-            password: userLogin.password || "123456" || '',
-        },
-        validationSchema: Yup.object({
-            email: Yup.string().required("Please Enter Your Email"),
-            password: Yup.string().required("Please Enter Your Password"),
-        }),
-        onSubmit: (values) => {
-            dispatch(loginUser(values, props.router.navigate));
-        }
+      initialValues: {
+        email: "rabinabaga@gmail.com" || "" || "",
+        password: "qwertyiop" || "123456" || "",
+      },
+      validationSchema: Yup.object({
+        email: Yup.string().required("Please Enter Your Email"),
+        password: Yup.string().required("Please Enter Your Password"),
+      }),
+      onSubmit: async (values) => {
+         dispatch(loginUser(values, props.router.navigate));
+      },
     });
 
     const signIn = type => {

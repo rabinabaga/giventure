@@ -4,11 +4,27 @@ import { addStepThunk, addTitleThunk } from "../../slices/thunks";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
 import InputTextArea from "./input-textarea";
+import { postGamePlan } from "../../helpers/fakebackend_helper";
+
+  import { ToastContainer, toast } from "react-toastify";
+    import "react-toastify/dist/ReactToastify.css";
+  
 
 const GetThingsDone = () => {
   const dispatch = useDispatch();
-  document.title = "Get Things Done"; //for meta title
+    const newTaskState = useSelector((state) => state.NewTask);
   const newTaskStateTitle = useSelector((state) => state.NewTask.title);
+
+  const handleSave  = () => {
+           toast("successfully posted");
+const dataToSave = [...newTaskState.steps];
+dataToSave.pop();
+    const response = postGamePlan({title: newTaskStateTitle, steps: dataToSave});
+    if(response){
+
+    }
+  }
+  document.title = "Get Things Done"; //for meta title
 
   const newTaskStateSteps = useSelector((state) => state.NewTask.steps);
   console.log("new task steps", newTaskStateSteps);
@@ -51,6 +67,7 @@ const GetThingsDone = () => {
 
   return (
     <>
+  <ToastContainer/>
       <div className="page-content">
         <Container fluid={true}>
           {/* <BreadCrumb title="Get Things Done" breadcrumbItem="Get Things Done" /> */}
@@ -81,7 +98,7 @@ const GetThingsDone = () => {
               </div>
 
               <div className="item-4">
-                <button className="primary">Save</button>
+                <button className="primary" onClick={handleSave}>Save</button>
               </div>
             </div>
 

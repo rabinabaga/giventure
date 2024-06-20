@@ -1,8 +1,37 @@
+import axios from "axios";
 import { APIClient } from "./api_helper";
 
 import * as url from "./url_helper";
 
 const api = new APIClient();
+
+export const postGamePlan = async (data) => {
+  console.log("data in post gaem plan", data);
+const result = sessionStorage.getItem("authUser");
+
+const result1 = JSON.parse(result);
+
+console.log(result1);
+const token = result1.result.accessToken;
+console.log(token);
+  try {
+    const response = await axios.post("api/v1/game_plan", data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.log("error");
+  }
+}
+
+
+
+
+
+// Login Method
+export const postLogin = (data) => api.create("api/v1/auth/login", data);
 
 // Gets the logged in user data from local session
 export const getLoggedInUser = () => {
@@ -367,4 +396,4 @@ export const getAPIKey = () => api.get(url.GET_API_KEY);
 export const getTasks = () => api.get(url.GET_TASKS);
 export const addNewTasks = (card) => api.create(url.ADD_TASKS, card)
 export const updateTasks = (card) => api.put(url.UPDATE_TASKS, card)
-export const deleteTasks = (card) => api.delete(url.DELETE_TASKS, { headers: {card} })
+export const deleteTasks = (card) => api.delete(url.DELETE_TASKS, { headers: { card } })

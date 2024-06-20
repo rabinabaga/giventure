@@ -58,7 +58,7 @@
       .step-textarea {
         height: 30px;
         line-height: 1;
-        @include textarea-decor(497px, left);
+        @include textarea-decor(35vw, left);
       }
     }
     .item-4 {
@@ -120,7 +120,7 @@
     position: relative;
 
     textarea {
-      @include textarea-decor(728px, center);
+      @include textarea-decor(50vw, center);
     }
     textarea.hide {
       opacity: 0;
