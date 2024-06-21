@@ -26,7 +26,7 @@ console.log(token);
   }
 }
 
-export const getAllGamePlans = (data) => api.get(url.GET_ALL_GAME_PLANS);
+export const getAllGamePlans = () => api.get(url.GET_ALL_GAME_PLANS);
 
 
 
