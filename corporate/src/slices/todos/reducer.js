@@ -47,7 +47,13 @@ const TodosSlice = createSlice({
     builder.addCase(getProjects.rejected, (state, action) => {
       state.error = action.payload.error || null;
     });
+    builder.addCase(addNewProject.pending, () => {
+      console.log("add new to do project pending");
+    });
     builder.addCase(addNewProject.fulfilled, (state, action) => {
+      console.log("here in builder");
+      console.log("action payload ", action.payload);
+      console.log(state.projects);
       state.projects.unshift(action.payload);
     });
     builder.addCase(addNewProject.rejected, (state, action) => {

@@ -8,11 +8,13 @@ axios.defaults.headers.post["Content-Type"] = "application/json";
 
 // content type
 if(JSON.parse(sessionStorage.getItem("authUser"))){
-  const token = JSON.parse(sessionStorage.getItem("authUser")).result
-    .accessToken
+  const token = JSON.parse(sessionStorage.getItem("authUser")).result.accessToken
     ? JSON.parse(sessionStorage.getItem("authUser")).result.accessToken
     : null;
-  if (token) axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+  if (token) {
+    console.log("authorization");
+    axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+  }
 
 }
 
@@ -81,6 +83,7 @@ class APIClient {
    * post given data to url
    */
   create = (url, data) => {
+    console.log("here in create");
     return axios.post(url, data);
   };
   /**

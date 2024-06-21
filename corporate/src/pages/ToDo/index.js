@@ -7,6 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import taskImg from "../../assets/images/task.png";
 import DeleteModal from '../../Components/Common/DeleteModal';
+import axios  from 'axios';
 
 //redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -70,7 +71,7 @@ const Priority = ({ priority }) => {
 
 const ToDoList = () => {
     document.title = "To Do Lists | Velzon - React Admin & Dashboard Template";
-
+const [test, settest] = useState();
     const dispatch = useDispatch();
 
     const selectLayoutState = (state) => state.Todos;
@@ -275,9 +276,9 @@ const ToDoList = () => {
         }),
         onSubmit: (values) => {
             const newProjectData = {
-                id: (Math.floor(Math.random() * (30 - 20)) + 20).toString(),
-                title: values.title,
-                subItem: [{ id: 1, version: "v1.0.0", iconClass: "danger" }]
+                // id: (Math.floor(Math.random() * (30 - 20)) + 20).toString(),
+                name: values.title,
+                // subItem: [{ id: 1, version: "v1.0.0", iconClass: "danger" }]
             };
             // save new Project Data
             dispatch(onAddNewProject(newProjectData));
@@ -374,19 +375,44 @@ console.log(taskList);
     };
       useEffect(() => {
 
+        async function postTodoProjects(){
+             if (JSON.parse(sessionStorage.getItem("authUser"))) {
+               const token = JSON.parse(sessionStorage.getItem("authUser"))
+                 .result.accessToken
+                 ? JSON.parse(sessionStorage.getItem("authUser")).result
+                     .accessToken
+                 : null;
+               if (token) {
+                 console.log("authorization");
+                  axios.post(
+                    "http://localhost:8001/api/v1/todoProjects",
+                    { name: "hi this is my nam;e" },
+                    {
+                      headers: {
+                        Authorization: `Bearer ${token}`,
+                      },
+                    }
+                  );
+               }
+             }
+ 
+        }
+
         async function fetchAllGamePlans(){
             const response = await getAllGamePlans();
           if(response){
-              setTaskList(response.result);
+              setTodo(response.result);
           }
             
         }
         // setTodo(todos);
         fetchAllGamePlans();
-      }, [taskList]);
+        postTodoProjects();
+      }, [todos]);
 
     return (
-        <React.Fragment>
+       <>
+        {todos.length >= 1? <React.Fragment>
             <ToastContainer closeButton={false} />
             <DeleteModal
                 show={deleteModal}
@@ -408,14 +434,8 @@ console.log(taskList);
                                         {(projects || []).map((item, key) => (
 
                                             <li key={key}>
-                                                <Link to="#" className="nav-link fs-13" id={"todos" + key}>{item.title}</Link>
-                                                <UncontrolledCollapse toggler={"#todos" + key}>
-                                                    <ul className="mb-0 sub-menu list-unstyled ps-3 vstack gap-2 mb-2">
-                                                        {(item.subItem || []).map((item, key) => (<li key={key}>
-                                                            <Link to="#"><i className={"ri-stop-mini-fill align-middle fs-15 text-" + item.iconClass}></i> {item.version}</Link>
-                                                        </li>))}
-                                                    </ul>
-                                                </UncontrolledCollapse>
+                                                <Link to="#" className="nav-link fs-13" id={"todos" + key}>{item?.title}</Link>
+                                                
                                             </li>))}
                                     </ul>
                                 </SimpleBar>
@@ -720,7 +740,8 @@ console.log(taskList);
                 </ModalBody>
             </Modal>
 
-        </React.Fragment >
+        </React.Fragment >:null}
+       </>
     );
 };
 
