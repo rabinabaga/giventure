@@ -212,14 +212,13 @@ export const ADD_NEW_FILE = "/add/file";
 export const UPDATE_FILE = "/update/file";
 
 // To do
-export const GET_TODOS = "/todo";
 export const DELETE_TODO = "/delete/todo";
 export const ADD_NEW_TODO = "/add/todo";
 export const UPDATE_TODO = "/update/todo";
 
 // To do Project
-export const GET_PROJECTS = "/projects";
-export const ADD_NEW_TODO_PROJECT = "/add/project";
+export const GET_PROJECTS = "/todoProjects";
+export const ADD_NEW_TODO_PROJECT = "/todoProjects";
 
 //JOB APPLICATION
 export const GET_APPLICATION_LIST = "/application-list";

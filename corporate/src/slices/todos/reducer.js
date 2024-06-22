@@ -4,7 +4,7 @@ import {
   getTodoProjects,addNewTodo,
   updateTodo,
   deleteTodo,
-  getProjects,
+  getTheProjects,
   addNewProject,
 } from "./thunk";
 export const initialState = {
@@ -49,13 +49,18 @@ const TodosSlice = createSlice({
     builder.addCase(deleteTodo.rejected, (state, action) => {
       state.error = action.payload.error || null;
     });
-    builder.addCase(getProjects.fulfilled, (state, action) => {
+    builder.addCase(getTheProjects.pending, (state) => {
+      console.log(" pendingprojects");
+    });
+    builder.addCase(getTheProjects.fulfilled, (state, action) => {
+      console.log(action.payload, " fulfilled projects");
       state.projects = action.payload;
     });
-    builder.addCase(getProjects.rejected, (state, action) => {
+    builder.addCase(getTheProjects.rejected, (state, action) => {
       state.error = action.payload.error || null;
     });
     builder.addCase(addNewProject.fulfilled, (state, action) => {
+      console.log("action.payload", action.payload);
       state.projects.unshift(action.payload);
     });
     builder.addCase(addNewProject.rejected, (state, action) => {

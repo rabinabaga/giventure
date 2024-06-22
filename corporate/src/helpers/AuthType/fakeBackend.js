@@ -1338,19 +1338,19 @@ const fakeBackend = () => {
     });
   });
 
-  // To do
-  mock.onGet(url.GET_TODOS).reply(() => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (todoTaskList) {
-          // Passing fake JSON data as response
-          resolve([200, todoTaskList]);
-        } else {
-          reject([400, "Cannot get To do data"]);
-        }
-      });
-    });
-  });
+  // // To do
+  // mock.onGet(url.GET_TODOS).reply(() => {
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       if (todoTaskList) {
+  //         // Passing fake JSON data as response
+  //         resolve([200, todoTaskList]);
+  //       } else {
+  //         reject([400, "Cannot get To do data"]);
+  //       }
+  //     });
+  //   });
+  // });
 
   mock.onDelete(url.DELETE_TODO).reply((config) => {
     return new Promise((resolve, reject) => {

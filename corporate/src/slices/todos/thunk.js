@@ -4,12 +4,11 @@ import 'react-toastify/dist/ReactToastify.css';
 
 //Include Both Helper File with needed methods
 import {
-  getTodoProjects as getTodoProjectsApi,
-  getTodos as getTodosApi,
+  getTodoProjects as getTodoProjectsApi,//actual to dos 
   addNewTodo as addNewTodoApi,
   updateTodo as updateTodoApi,
   deleteTodo as deleteTodoApi,
-  getProjects as getProjectsApi,
+  getTheProjects as getTheProjectsApi,
   addNewProject as addNewProjectApi,
 } from "../../helpers/fakebackend_helper";
 
@@ -58,10 +57,10 @@ export const deleteTodo = createAsyncThunk("todos/deleteTodo", async (todo) => {
   }
 });
 
-export const getProjects = createAsyncThunk("todos/getProjects", async () => {
+export const getTheProjects = createAsyncThunk("todos/getTheProjects", async () => {
   try {
-    const response = getProjectsApi();
-    return response;
+    const responseData = getTheProjectsApi();
+    return responseData;
   } catch (error) {
     return error;
   }

@@ -42,12 +42,12 @@ import avatar10 from "../../assets/images/users/avatar-10.jpg";
 
 //import action
 import {
-  getTodoProjects as onGetTodoProjects,
+  getTodoProjects as onGetTodoProjects,//actually to dos 
   getTodos as onGetTodos,
   updateTodo as onupdateTodo,
   deleteTodo as onDeleteTodo,
   addNewTodo as onAddNewTodo,
-  getProjects as onGetProjects,
+  getTheProjects as onGetTheProjects,
   addNewProject as onAddNewProject,
 } from "../../slices/thunks";
 import { createSelector } from "reselect";
@@ -118,7 +118,6 @@ const ToDoList = () => {
     projects: state.projects,
   }));
   const { todos, projects } = useSelector(selectLayoutProperties);
-
   // Inside your component
 
   const [deleteModal, setDeleteModal] = useState(false);
@@ -129,16 +128,18 @@ const ToDoList = () => {
   const [modalProject, setModalProject] = useState(false);
 
   useEffect(() => {
-    dispatch(onGetProjects());
+    dispatch(onGetTheProjects());
   }, [dispatch]);
   console.log("todos", todos);
+
+    console.log("projects", projects);
 
   useEffect(() => {
     setTodo(todos);
     setTaskList(todos);
   }, [todos]);
 
-
+//actual to do items fetching
   useEffect(() => {
     dispatch(onGetTodoProjects());
   }, [dispatch]);
@@ -312,9 +313,7 @@ const ToDoList = () => {
     }),
     onSubmit: (values) => {
       const newProjectData = {
-        id: (Math.floor(Math.random() * (30 - 20)) + 20).toString(),
-        title: values.title,
-        subItem: [{ id: 1, version: "v1.0.0", iconClass: "danger" }],
+        name: values.title
       };
       // save new Project Data
       dispatch(onAddNewProject(newProjectData));
@@ -466,7 +465,7 @@ const ToDoList = () => {
                           className="nav-link fs-13"
                           id={"todos" + key}
                         >
-                          {item.title}
+                          {item.name}
                         </Link>
                         <UncontrolledCollapse toggler={"#todos" + key}>
                           <ul className="mb-0 sub-menu list-unstyled ps-3 vstack gap-2 mb-2">

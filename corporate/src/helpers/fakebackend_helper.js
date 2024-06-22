@@ -15,9 +15,9 @@ export const getTodoProjects = async () => {
   try {
     const response = await axios.get("http://localhost:8001/api/v1/game_plan", {
       headers: {
-        Authorization:
+        "Authorization":
           "Bearer " +
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWVkMDg0ZDVhM2Y4NTQ5MDlkMDIzNSIsImlhdCI6MTcxOTAxNDM4NiwiZXhwIjoxNzE5MDE3OTg2fQ.anLXDQBAhoqE90lEU_YUvwZO_xxzBhyiGy5ugjvPgCg",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWVkMDg0ZDVhM2Y4NTQ5MDlkMDIzNSIsImlhdCI6MTcxOTA1NDcwNCwiZXhwIjoxNzE5MTQxMTA0fQ._KXaJtEbfr0lSOyBrbe7g78ktLuCuUV-kE4MnXsv7Zg",
       },
     });
     console.log("response.result", response.result);
@@ -420,14 +420,28 @@ export const addNewFile = (file) => api.create(url.ADD_NEW_FILE, file);
 export const updateFile = (file) => api.put(url.UPDATE_FILE, file);
 
 // To Do
-export const getTodos = (todo) => api.get(url.GET_TODOS, todo);
 export const deleteTodo = (todo) =>
   api.delete(url.DELETE_TODO, { headers: { todo } });
 export const addNewTodo = (todo) => api.create(url.ADD_NEW_TODO, todo);
 export const updateTodo = (todo) => api.put(url.UPDATE_TODO, todo);
 
 // To do Project
-export const getProjects = (project) => api.get(url.GET_PROJECTS, project);
+export const getTheProjects = async () => {
+  try {
+    const response = await axios.get("http://localhost:8001/api/v1/todo_projects", {
+      headers: {
+        Authorization:
+          "Bearer " +
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWVkMDg0ZDVhM2Y4NTQ5MDlkMDIzNSIsImlhdCI6MTcxOTA1NDcwNCwiZXhwIjoxNzE5MTQxMTA0fQ._KXaJtEbfr0lSOyBrbe7g78ktLuCuUV-kE4MnXsv7Zg",
+      },
+    });
+    console.log("response.result projects", response.result);
+    return response.result;
+  } catch (exception) {
+    console.log("exception", exception);
+  }
+};
+
 export const addNewProject = (project) =>
   api.create(url.ADD_NEW_TODO_PROJECT, project);
 
