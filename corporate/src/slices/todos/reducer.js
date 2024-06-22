@@ -1,5 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getTodos, addNewTodo, updateTodo, deleteTodo, getProjects, addNewProject } from './thunk';
+import {
+  getTodos,
+  getTodoProjects,addNewTodo,
+  updateTodo,
+  deleteTodo,
+  getProjects,
+  addNewProject,
+} from "./thunk";
 export const initialState = {
   todos: [],
   projects: [],
@@ -11,10 +18,11 @@ const TodosSlice = createSlice({
   initialState,
   reducer: {},
   extraReducers: (builder) => {
-    builder.addCase(getTodos.fulfilled, (state, action) => {
+    builder.addCase(getTodoProjects.fulfilled, (state, action) => {
+      console.log("fulfilled");
       state.todos = action.payload;
     });
-    builder.addCase(getTodos.rejected, (state, action) => {
+    builder.addCase(getTodoProjects.rejected, (state, action) => {
       state.error = action.payload.error || null;
     });
     builder.addCase(addNewTodo.fulfilled, (state, action) => {
@@ -47,13 +55,7 @@ const TodosSlice = createSlice({
     builder.addCase(getProjects.rejected, (state, action) => {
       state.error = action.payload.error || null;
     });
-    builder.addCase(addNewProject.pending, () => {
-      console.log("add new to do project pending");
-    });
     builder.addCase(addNewProject.fulfilled, (state, action) => {
-      console.log("here in builder");
-      console.log("action payload ", action.payload);
-      console.log(state.projects);
       state.projects.unshift(action.payload);
     });
     builder.addCase(addNewProject.rejected, (state, action) => {

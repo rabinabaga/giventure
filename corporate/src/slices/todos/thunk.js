@@ -4,6 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 //Include Both Helper File with needed methods
 import {
+  getTodoProjects as getTodoProjectsApi,
   getTodos as getTodosApi,
   addNewTodo as addNewTodoApi,
   updateTodo as updateTodoApi,
@@ -12,9 +13,9 @@ import {
   addNewProject as addNewProjectApi,
 } from "../../helpers/fakebackend_helper";
 
-export const getTodos = createAsyncThunk("todos/getTodos", async () => {
+export const getTodoProjects = createAsyncThunk("todos/getTodoProjects", async () => {
   try {
-    const response = getTodosApi();
+    const response = getTodoProjectsApi();
     return response;
   } catch (error) {
     return error;

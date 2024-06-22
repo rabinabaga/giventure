@@ -5,38 +5,26 @@ import * as url from "./url_helper";
 
 const api = new APIClient();
 
-// export const postGamePlan = async (data) => {
-//   console.log("data in post gaem plan", data);
-// const result = sessionStorage.getItem("authUser");
-
-// const result1 = JSON.parse(result);
-
-// console.log(result1);
-// const token = result1.result.accessToken;
-// console.log(token);
-//   try {
-//     const response = await axios.post("game_plan", data, {
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     });
-//     return response;
-//   } catch (error) {
-//     console.log("error");
-//   }
-// }
-
-export const getAllGamePlans = () => api.get(url.GET_ALL_GAME_PLANS);
-export const postGamePlan = (data) => api.create("game_plan", data);
-
-// Login Method
-export const postLogin = (data) => api.create("auth/login", data);
-
 // Gets the logged in user data from local session
 export const getLoggedInUser = () => {
   const user = localStorage.getItem("user");
   if (user) return JSON.parse(user);
   return null;
+};
+export const getTodoProjects = async () => {
+  try {
+    const response = await axios.get("http://localhost:8001/api/v1/game_plan", {
+      headers: {
+        Authorization:
+          "Bearer " +
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWVkMDg0ZDVhM2Y4NTQ5MDlkMDIzNSIsImlhdCI6MTcxOTAxNDM4NiwiZXhwIjoxNzE5MDE3OTg2fQ.anLXDQBAhoqE90lEU_YUvwZO_xxzBhyiGy5ugjvPgCg",
+      },
+    });
+    console.log("response.result", response.result);
+    return response.result;
+  } catch (exception) {
+    console.log("exception", exception);
+  }
 };
 
 // //is user is logged in
@@ -440,22 +428,8 @@ export const updateTodo = (todo) => api.put(url.UPDATE_TODO, todo);
 
 // To do Project
 export const getProjects = (project) => api.get(url.GET_PROJECTS, project);
-export const addNewProject =async (project) => {
-  if (JSON.parse(sessionStorage.getItem("authUser"))) {
-    const token = JSON.parse(sessionStorage.getItem("authUser")).result.accessToken? JSON.parse(sessionStorage.getItem("authUser")).result.accessToken
-      : null;
-    if (token) {
-      console.log("authorization");
-       const response = await axios.post("http://localhost:8001/api/v1/todoProjects",project, {
-         headers: {
-           Authorization: `Bearer ${token}`,
-         },
-       });
-    }
-  }
- 
-  // api.create(url.ADD_NEW_TODO_PROJECT, project);
-};
+export const addNewProject = (project) =>
+  api.create(url.ADD_NEW_TODO_PROJECT, project);
 
 //Job Application
 export const getJobApplicationList = () => api.get(url.GET_APPLICATION_LIST);

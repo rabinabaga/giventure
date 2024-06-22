@@ -7,8 +7,6 @@ export * from "./auth/register/thunk";
 export * from "./auth/forgetpwd/thunk";
 export * from "./auth/profile/thunk";
 
-export * from "./getThingsDone/thunk";
-
 //Calendar
 export * from "./calendar/thunk";
 //Chat

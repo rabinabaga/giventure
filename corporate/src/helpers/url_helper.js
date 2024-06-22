@@ -1,8 +1,9 @@
 //REGISTER
 export const POST_FAKE_REGISTER = "/auth/signup";
+export const GET_TODO_PROJECTS = "/game_plan";
 
 //LOGIN
-export const POST_FAKE_LOGIN = "/auth/signin";
+export const POST_FAKE_LOGIN = "/auth/login";
 export const POST_FAKE_JWT_LOGIN = "/post-jwt-login";
 export const POST_FAKE_PASSWORD_FORGET = "/auth/forgot-password";
 export const POST_FAKE_JWT_PASSWORD_FORGET = "/jwt-forget-pwd";
@@ -11,9 +12,6 @@ export const SOCIAL_LOGIN = "/social-login";
 //PROFILE
 export const POST_EDIT_JWT_PROFILE = "/post-jwt-profile";
 export const POST_EDIT_PROFILE = "/user";
-
-//GAME PLAN
-export const GET_ALL_GAME_PLANS = "/game_plan";
 
 // Calendar
 export const GET_EVENTS = "/events";
@@ -221,7 +219,7 @@ export const UPDATE_TODO = "/update/todo";
 
 // To do Project
 export const GET_PROJECTS = "/projects";
-export const ADD_NEW_TODO_PROJECT = "/project";
+export const ADD_NEW_TODO_PROJECT = "/add/project";
 
 //JOB APPLICATION
 export const GET_APPLICATION_LIST = "/application-list";

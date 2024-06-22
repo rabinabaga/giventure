@@ -2,21 +2,16 @@ import axios from "axios";
 import { api } from "../config";
 
 // default
-axios.defaults.baseURL = api.API_URL;
+axios.defaults.baseURL = "http://localhost:8001/api/v1";
 // content type
-axios.defaults.headers.post["Content-Type"] = "application/json";
+http: axios.defaults.headers.post["Content-Type"] = "application/json";
 
 // content type
-if(JSON.parse(sessionStorage.getItem("authUser"))){
-  const token = JSON.parse(sessionStorage.getItem("authUser")).result.accessToken
-    ? JSON.parse(sessionStorage.getItem("authUser")).result.accessToken
-    : null;
-  if (token) {
-    console.log("authorization");
-    axios.defaults.headers.common["Authorization"] = "Bearer " + token;
-  }
-
-}
+// const token = JSON.parse(sessionStorage.getItem("authUser")).result.accessToken ? JSON.parse(sessionStorage.getItem("authUser")).result.accessToken : null;
+// if (token)
+  axios.defaults.headers.common["Authorization"] =
+    "Bearer " +
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWVkMDg0ZDVhM2Y4NTQ5MDlkMDIzNSIsImlhdCI6MTcxOTAxNDM4NiwiZXhwIjoxNzE5MDE3OTg2fQ.anLXDQBAhoqE90lEU_YUvwZO_xxzBhyiGy5ugjvPgCg";
 
 // intercepting to capture errors
 axios.interceptors.response.use(
@@ -58,23 +53,21 @@ class APIClient {
   //  get = (url, params) => {
   //   return axios.get(url, params);
   // };
-  get = async (url, params) => {
+  get = (url, params) => {
     let response;
 
     let paramKeys = [];
 
     if (params) {
-      Object.keys(params).map((key) => {
-        paramKeys.push(key + "=" + params[key]);
+      Object.keys(params).map(key => {
+        paramKeys.push(key + '=' + params[key]);
         return paramKeys;
       });
 
-      const queryString =
-        paramKeys && paramKeys.length ? paramKeys.join("&") : "";
+      const queryString = paramKeys && paramKeys.length ? paramKeys.join('&') : "";
       response = axios.get(`${url}?${queryString}`, params);
     } else {
-      response = await axios.get(`${url}`, params);
-      console.log("response", response);
+      response = axios.get(`${url}`, params);
     }
 
     return response;
@@ -83,7 +76,6 @@ class APIClient {
    * post given data to url
    */
   create = (url, data) => {
-    console.log("here in create");
     return axios.post(url, data);
   };
   /**
